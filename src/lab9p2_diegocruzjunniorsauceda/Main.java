@@ -5,6 +5,7 @@
 package lab9p2_diegocruzjunniorsauceda;
 
 import javax.swing.JOptionPane;
+import java.sql.SQLException;
 
 /**
  *
@@ -538,13 +539,26 @@ public class Main extends javax.swing.JFrame {
             String Quantity = tf_quantity.getText();
             String Discount = tf_discount.getText();
             String Profit = tf_profit.getText();
-            
-            
+
             Registro newre = new Registro(OrderID, OrderDate, ShipDate, ShipMode, CustomerID, CustomerName, Segment, Country, City, State, PostalCode, Region, ProductID,
-                Category, SubCateg, ProductName, Sales, Quantity, Discount, Profit);
-            
+                    Category, SubCateg, ProductName, Sales, Quantity, Discount, Profit);
+            Dba db = new Dba("./BaseDatosLab.mdb");
+            db.conectar();
+            try {
+                
+                db.query.execute("INSERT INTO BaseDatosLab"
+                        + " ([Order ID], [Order Date], [Ship Date], [Customer ID], [Customer Name], Segment, Country, City, State, [Postal Code], Region, [Product ID], Category, [Sub-Category], [Product Name], Sales, Quantity, Discount, Profit)"
+                        + " VALUES ('" + OrderID + "', '" + OrderDate + "'+'" + ShipDate + "', '" + CustomerID + "'+'" + CustomerName + "', '" + Segment + "'+'"
+                        + Country + "', '" + City + "'+'" + State + "', '" + PostalCode + "'+'" + Region + "', '" + ProductID + "'+'" + Category + "', '" + SubCateg + "'+'" + ProductName + "', '" + Sales + "'"
+                                + "+'" + Quantity + "', '" + Discount + "'+'" + Profit + "')");
+                db.commit();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            db.desconectar();
+
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this,"Ocurrio un error.");
+            JOptionPane.showMessageDialog(this, "Ocurrio un error.");
             e.printStackTrace();
         }
     }//GEN-LAST:event_jb_agregarMouseClicked
