@@ -4,6 +4,8 @@
  */
 package lab9p2_diegocruzjunniorsauceda;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author dfcm9
@@ -128,12 +130,6 @@ public class Main extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Postal Code:");
 
-        tf_customername.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_customernameActionPerformed(evt);
-            }
-        });
-
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -149,12 +145,6 @@ public class Main extends javax.swing.JFrame {
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Product ID:");
 
-        tf_productID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_productIDActionPerformed(evt);
-            }
-        });
-
         jLabel12.setBackground(new java.awt.Color(255, 255, 255));
         jLabel12.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
@@ -165,22 +155,10 @@ public class Main extends javax.swing.JFrame {
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Category:");
 
-        tf_category.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_categoryActionPerformed(evt);
-            }
-        });
-
         jLabel14.setBackground(new java.awt.Color(255, 255, 255));
         jLabel14.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Sub-Category:");
-
-        tf_subcategory.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_subcategoryActionPerformed(evt);
-            }
-        });
 
         jLabel15.setBackground(new java.awt.Color(255, 255, 255));
         jLabel15.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
@@ -191,12 +169,6 @@ public class Main extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("Product Name:");
-
-        tf_productname.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_productnameActionPerformed(evt);
-            }
-        });
 
         jLabel17.setBackground(new java.awt.Color(255, 255, 255));
         jLabel17.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
@@ -218,35 +190,16 @@ public class Main extends javax.swing.JFrame {
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setText("Profit:");
 
-        tf_sales.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_salesActionPerformed(evt);
-            }
-        });
-
-        tf_quantity.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_quantityActionPerformed(evt);
-            }
-        });
-
-        tf_discount.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_discountActionPerformed(evt);
-            }
-        });
-
-        tf_profit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_profitActionPerformed(evt);
-            }
-        });
-
         jb_agregar.setBackground(new java.awt.Color(102, 102, 102));
         jb_agregar.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
         jb_agregar.setForeground(new java.awt.Color(255, 255, 255));
         jb_agregar.setText("Agregar Registro");
         jb_agregar.setFocusable(false);
+        jb_agregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_agregarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -423,11 +376,6 @@ public class Main extends javax.swing.JFrame {
         jb_listorders.setForeground(new java.awt.Color(255, 255, 255));
         jb_listorders.setText("Orders");
         jb_listorders.setFocusable(false);
-        jb_listorders.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jb_listordersActionPerformed(evt);
-            }
-        });
 
         jb_listdetails.setBackground(new java.awt.Color(255, 153, 0));
         jb_listdetails.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
@@ -568,45 +516,38 @@ public class Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jb_listordersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_listordersActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jb_listordersActionPerformed
-
-    private void tf_productIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_productIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_productIDActionPerformed
-
-    private void tf_categoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_categoryActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_categoryActionPerformed
-
-    private void tf_subcategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_subcategoryActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_subcategoryActionPerformed
-
-    private void tf_productnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_productnameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_productnameActionPerformed
-
-    private void tf_salesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_salesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_salesActionPerformed
-
-    private void tf_quantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_quantityActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_quantityActionPerformed
-
-    private void tf_discountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_discountActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_discountActionPerformed
-
-    private void tf_profitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_profitActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_profitActionPerformed
-
-    private void tf_customernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_customernameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_customernameActionPerformed
+    private void jb_agregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_agregarMouseClicked
+        try {
+            String OrderID = tf_orderid.getText();
+            String OrderDate = tf_orderdate.getText();
+            String ShipDate = tf_shipdate.getText();
+            String ShipMode = tf_shipmode.getText();
+            String CustomerID = tf_customerid.getText();
+            String CustomerName = tf_customername.getText();
+            String Segment = tf_segment.getText();
+            String Country = tf_country.getText();
+            String City = tf_city.getText();
+            String State = tf_state.getText();
+            String PostalCode = tf_postalcode.getText();
+            String Region = tf_region.getText();
+            String ProductID = tf_productID.getText();
+            String Category = tf_category.getText();
+            String SubCateg = tf_subcategory.getText();
+            String ProductName = tf_productname.getText();
+            String Sales = tf_sales.getText();
+            String Quantity = tf_quantity.getText();
+            String Discount = tf_discount.getText();
+            String Profit = tf_profit.getText();
+            
+            
+            Registro newre = new Registro(OrderID, OrderDate, ShipDate, ShipMode, CustomerID, CustomerName, Segment, Country, City, State, PostalCode, Region, ProductID,
+                Category, SubCateg, ProductName, Sales, Quantity, Discount, Profit);
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,"Ocurrio un error.");
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jb_agregarMouseClicked
 
     /**
      * @param args the command line arguments
