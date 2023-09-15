@@ -546,7 +546,7 @@ public class Main extends javax.swing.JFrame {
             db.conectar();
             try {
                 
-                db.query.execute("INSERT INTO BaseDatosLab"
+                db.query.execute("INSERT INTO TenRecordReal"
                         + " ([Order ID], [Order Date], [Ship Date], [Customer ID], [Customer Name], Segment, Country, City, State, [Postal Code], Region, [Product ID], Category, [Sub-Category], [Product Name], Sales, Quantity, Discount, Profit)"
                         + " VALUES ('" + OrderID + "', '" + OrderDate + "'+'" + ShipDate + "', '" + CustomerID + "'+'" + CustomerName + "', '" + Segment + "'+'"
                         + Country + "', '" + City + "'+'" + State + "', '" + PostalCode + "'+'" + Region + "', '" + ProductID + "'+'" + Category + "', '" + SubCateg + "'+'" + ProductName + "', '" + Sales + "'"
