@@ -77,6 +77,7 @@ public class Hilo extends Thread {
     @Override
     public void run(){
         
+        
         while (vive) {            
             if(jp.getValue()>=100){
                 Area.setText(hola);
@@ -85,6 +86,11 @@ public class Hilo extends Thread {
             else{
                jp.setValue(jp.getValue()+avance);
                
+            }
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
             }
         }
     }
