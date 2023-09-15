@@ -547,10 +547,8 @@ public class Main extends javax.swing.JFrame {
             try {
                 
                 db.query.execute("INSERT INTO TenRecordReal"
-                        + " ([Order ID], [Order Date], [Ship Date], [Customer ID], [Customer Name], Segment, Country, City, State, [Postal Code], Region, [Product ID], Category, [Sub-Category], [Product Name], Sales, Quantity, Discount, Profit)"
-                        + " VALUES ('" + OrderID + "', '" + OrderDate + "'+'" + ShipDate + "', '" + CustomerID + "'+'" + CustomerName + "', '" + Segment + "'+'"
-                        + Country + "', '" + City + "'+'" + State + "', '" + PostalCode + "'+'" + Region + "', '" + ProductID + "'+'" + Category + "', '" + SubCateg + "'+'" + ProductName + "', '" + Sales + "'"
-                                + "+'" + Quantity + "', '" + Discount + "'+'" + Profit + "')");
+                        + " ([Order ID], [Order Date], [Ship Date], [Ship Mode], [Customer ID], [Customer Name], Segment, Country, City, State, [Postal Code], Region, [Product ID], Category, [Sub-Category], [Product Name], Sales, Quantity, Discount, Profit)"
+                        + " VALUES ('" + OrderID + "', '" + OrderDate + "'+'" + ShipDate +"', '" + ShipMode + "', '" + CustomerID + "'+'" + CustomerName + "', '" + Segment + "'+'"+ Country + "', '" + City + "'+'" + State + "', '" + PostalCode + "'+'" + Region + "', '" + ProductID + "'+'" + Category + "', '" + SubCateg + "'+'" + ProductName + "', '" + Sales + "'" + "+'" + Quantity + "', '" + Discount + "'+'" + Profit + "')");
                 db.commit();
             } catch (SQLException ex) {
                 ex.printStackTrace();
