@@ -542,7 +542,7 @@ public class Main extends javax.swing.JFrame {
 
             Registro newre = new Registro(OrderID, OrderDate, ShipDate, ShipMode, CustomerID, CustomerName, Segment, Country, City, State, PostalCode, Region, ProductID,
                     Category, SubCateg, ProductName, Sales, Quantity, Discount, Profit);
-            Dba db = new Dba("./BaseDatosLab.mdb");
+            Dba db = new Dba("./BaseDatosLab.accdb");
             db.conectar();
             try {
                 
