@@ -16,10 +16,8 @@ import javax.swing.table.DefaultTableModel;
  * @author dfcm9
  */
 public class Main extends javax.swing.JFrame {
-    
-    ArrayList <Registro> registros = new ArrayList();
-    
-    
+
+    ArrayList<Registro> registros = new ArrayList();
 
     /**
      * Creates new form Main
@@ -393,24 +391,44 @@ public class Main extends javax.swing.JFrame {
         jb_listorders.setForeground(new java.awt.Color(255, 255, 255));
         jb_listorders.setText("Orders");
         jb_listorders.setFocusable(false);
+        jb_listorders.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_listordersMouseClicked(evt);
+            }
+        });
 
         jb_listdetails.setBackground(new java.awt.Color(255, 153, 0));
         jb_listdetails.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
         jb_listdetails.setForeground(new java.awt.Color(255, 255, 255));
         jb_listdetails.setText("Details");
         jb_listdetails.setFocusable(false);
+        jb_listdetails.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_listdetailsMouseClicked(evt);
+            }
+        });
 
         jb_listcustomers.setBackground(new java.awt.Color(255, 51, 51));
         jb_listcustomers.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
         jb_listcustomers.setForeground(new java.awt.Color(255, 255, 255));
         jb_listcustomers.setText("Customers");
         jb_listcustomers.setFocusable(false);
+        jb_listcustomers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_listcustomersMouseClicked(evt);
+            }
+        });
 
         jb_listproducts.setBackground(new java.awt.Color(153, 153, 255));
         jb_listproducts.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
         jb_listproducts.setForeground(new java.awt.Color(255, 255, 255));
         jb_listproducts.setText("Products");
         jb_listproducts.setFocusable(false);
+        jb_listproducts.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_listproductsMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -509,6 +527,8 @@ public class Main extends javax.swing.JFrame {
 
         tp_crud.addTab("Eliminar Registro", jPanel4);
 
+        JPB_progreso.setBackground(new java.awt.Color(153, 153, 153));
+        JPB_progreso.setForeground(new java.awt.Color(204, 204, 204));
         JPB_progreso.setOpaque(true);
         JPB_progreso.setStringPainted(true);
 
@@ -526,9 +546,9 @@ public class Main extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
-                .addComponent(JPB_progreso, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap()
+                .addComponent(JPB_progreso, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(tp_crud, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
@@ -577,7 +597,7 @@ public class Main extends javax.swing.JFrame {
             Dba db = new Dba("./BaseDatosLab.accdb");
             db.conectar();
             try {
-                
+
                 db.query.execute("INSERT INTO TenRecordReal"
                         + " ([Order ID], [Order Date], [Ship Date],[Ship Mode], [Customer ID], [Customer Name], Segment, Country, City, State, [Postal Code], Region, [Product ID], Category, [Sub-Category], [Product Name], Sales, Quantity, Discount, Profit )"
                         + " VALUES ('" + OrderID + "', '" + OrderDate + "', '" + ShipDate + "', '" + ShipMode + "', '" + CustomerID + "', '" + CustomerName + "', '" + Segment + "', '" + Country + "', '" + City + "', '" + State + "', '" + PostalCode + "', '" + Region + "', '" + ProductID + "', '" + Category + "', '" + SubCateg + "', '" + ProductName + "', '" + Sales + "', '" + Quantity + "', '" + Discount + "', '" + Profit + "')");
@@ -586,8 +606,10 @@ public class Main extends javax.swing.JFrame {
                 ex.printStackTrace();
             }
             db.desconectar();
-            Thread H=new Hilo(Color.yellow, JPB_progreso, "Agregado Exitosamente", 17);
+            Thread H = new Hilo(Color.yellow, JPB_progreso, "Agregado Exitosamente", 17);
             JPB_progreso.setVisible(true);
+            JPB_progreso.setForeground(Color.yellow);
+            JPB_progreso.setBackground(Color.GRAY);
             H.start();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Ocurrio un error.");
@@ -597,40 +619,45 @@ public class Main extends javax.swing.JFrame {
 
     private void jb_eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_eliminarMouseClicked
         try {
-            Dba db  = new Dba("./BaseDatosLab.accdb");
+            Dba db = new Dba("./BaseDatosLab.accdb");
             db.conectar();
             try {
-                
-                db.query.execute("delete from TenRecordReal where id = "+jt_eliminar.getSelectedRow());
+
+                db.query.execute("delete from TenRecordReal where id = " + jt_eliminar.getSelectedRow());
                 db.commit();
+
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
             db.desconectar();
-            
+            Thread H = new Hilo(new Color(160, 11, 246), JPB_progreso, "Eliminado Exitosamente", 20);
+            JPB_progreso.setVisible(true);
+            JPB_progreso.setForeground(new Color(160, 11, 246));
+            JPB_progreso.setBackground(Color.GRAY);
+            H.start();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
-        
+
+
     }//GEN-LAST:event_jb_eliminarMouseClicked
 
     private void tp_crudStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tp_crudStateChanged
-        if (tp_crud.getSelectedIndex() == 2){
+        if (tp_crud.getSelectedIndex() == 2) {
             try {
-            
-                Dba db  = new Dba("./BaseDatosLab.accdb");
+
+                Dba db = new Dba("./BaseDatosLab.accdb");
                 db.conectar();
                 try {
                     db.query.execute("select Id, [Order ID], [Order Date], [Customer ID], Country, City, [Product ID], Sales from TenRecordReal");
                     ResultSet rs = db.query.getResultSet();
-                    while (rs.next()){
+                    while (rs.next()) {
                         registros.add(new Registro(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8)));
 
                     }
-                    
+
                     for (Registro regs : registros) {
-                        Object [] row = {regs.getLinea(), regs.getOrderId(), regs.getOrderDate(), regs.getCustomerId(), regs.getCountry(), regs.getCity(), regs.getProductId(), regs.getSales()};
+                        Object[] row = {regs.getLinea(), regs.getOrderId(), regs.getOrderDate(), regs.getCustomerId(), regs.getCountry(), regs.getCity(), regs.getProductId(), regs.getSales()};
                         DefaultTableModel modelo = (DefaultTableModel) jt_eliminar.getModel();
                         modelo.addRow(row);
                         jt_eliminar.setModel(modelo);
@@ -640,14 +667,49 @@ public class Main extends javax.swing.JFrame {
                     e.printStackTrace();
                 }
                 db.desconectar();
-            
-            
-            
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }//GEN-LAST:event_tp_crudStateChanged
+
+    private void jb_listordersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_listordersMouseClicked
+        // TODO add your handling code here:
+        Thread H = new Hilo(Color.green, JPB_progreso, "Orders Listados", 25);
+
+        JPB_progreso.setVisible(true);
+        JPB_progreso.setForeground(Color.green);
+        JPB_progreso.setBackground(Color.GRAY);
+        H.start();
+    }//GEN-LAST:event_jb_listordersMouseClicked
+
+    private void jb_listdetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_listdetailsMouseClicked
+        // TODO add your handling code here:
+        Thread H = new Hilo(Color.orange, JPB_progreso, "Details Listados", 20);
+        JPB_progreso.setVisible(true);
+        JPB_progreso.setForeground(Color.orange);
+        JPB_progreso.setBackground(Color.GRAY);
+        H.start();
+    }//GEN-LAST:event_jb_listdetailsMouseClicked
+
+    private void jb_listcustomersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_listcustomersMouseClicked
+        // TODO add your handling code here:
+        Thread H = new Hilo(Color.red, JPB_progreso, "Customers Listados", 17);
+        JPB_progreso.setVisible(true);
+        JPB_progreso.setForeground(Color.red);
+        JPB_progreso.setBackground(Color.GRAY);
+        H.start();
+    }//GEN-LAST:event_jb_listcustomersMouseClicked
+
+    private void jb_listproductsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_listproductsMouseClicked
+        // TODO add your handling code here:
+        Thread H = new Hilo(Color.blue, JPB_progreso, "Products Listados", 34);
+        JPB_progreso.setForeground(Color.BLUE);
+        JPB_progreso.setBackground(Color.GRAY);
+        JPB_progreso.setVisible(true);
+        H.start();
+    }//GEN-LAST:event_jb_listproductsMouseClicked
 
     /**
      * @param args the command line arguments
@@ -660,7 +722,7 @@ public class Main extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

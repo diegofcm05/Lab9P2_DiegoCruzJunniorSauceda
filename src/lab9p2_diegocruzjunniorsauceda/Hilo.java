@@ -28,7 +28,6 @@ public class Hilo extends Thread {
     public Hilo(Color c,JProgressBar J,JTextArea TA,String a,String h,int av){
         this.color=c;
         this.jp=J;
-        jp.setBackground(c);
         jp.setForeground(c);
         this.Area=TA;
         this.hola=h;
