@@ -4,6 +4,7 @@
  */
 package lab9p2_diegocruzjunniorsauceda;
 
+import java.awt.Color;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import java.sql.SQLException;
@@ -25,6 +26,7 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+        JPB_progreso.setVisible(false);
     }
 
     /**
@@ -91,6 +93,7 @@ public class Main extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jt_eliminar = new javax.swing.JTable();
         jb_eliminar = new javax.swing.JButton();
+        JPB_progreso = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -506,19 +509,26 @@ public class Main extends javax.swing.JFrame {
 
         tp_crud.addTab("Eliminar Registro", jPanel4);
 
+        JPB_progreso.setOpaque(true);
+        JPB_progreso.setStringPainted(true);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(38, 38, 38)
-                .addComponent(tp_crud, javax.swing.GroupLayout.PREFERRED_SIZE, 922, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tp_crud)
+                    .addComponent(JPB_progreso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(41, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(49, Short.MAX_VALUE)
+                .addContainerGap(17, Short.MAX_VALUE)
+                .addComponent(JPB_progreso, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tp_crud, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
@@ -576,6 +586,9 @@ public class Main extends javax.swing.JFrame {
                 ex.printStackTrace();
             }
             db.desconectar();
+            Thread H=new Hilo(Color.yellow, JPB_progreso, "Agregado Exitosamente", 17);
+            JPB_progreso.setVisible(true);
+            H.start();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Ocurrio un error.");
             e.printStackTrace();
@@ -672,6 +685,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JProgressBar JPB_progreso;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

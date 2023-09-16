@@ -29,6 +29,7 @@ public class Hilo extends Thread {
         this.color=c;
         this.jp=J;
         jp.setBackground(c);
+        jp.setForeground(c);
         this.Area=TA;
         this.hola=h;
         this.Adios=a;
@@ -84,6 +85,7 @@ public class Hilo extends Thread {
                 JOptionPane.showMessageDialog(null, Adios);
                 jp.setValue(0);
                 vive=false;
+                jp.setVisible(false);
             }
             else{
                jp.setValue(jp.getValue()+avance);
