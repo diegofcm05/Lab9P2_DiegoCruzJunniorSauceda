@@ -456,9 +456,16 @@ public class Main extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane2.setViewportView(jt_eliminar);
@@ -569,7 +576,6 @@ public class Main extends javax.swing.JFrame {
                 ex.printStackTrace();
             }
             db.desconectar();
-            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Ocurrio un error.");
             e.printStackTrace();

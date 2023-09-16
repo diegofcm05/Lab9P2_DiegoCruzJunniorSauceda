@@ -19,7 +19,7 @@ public class Hilo extends Thread {
     private JTextArea Area=new JTextArea();
     private String hola="";
     private String Adios="";
-    private boolean vive;
+    private boolean vive=true;
     private int avance;
     
     public Hilo(){
@@ -82,6 +82,8 @@ public class Hilo extends Thread {
             if(jp.getValue()>=100){
                 Area.setText(hola);
                 JOptionPane.showMessageDialog(null, Adios);
+                jp.setValue(0);
+                vive=false;
             }
             else{
                jp.setValue(jp.getValue()+avance);
