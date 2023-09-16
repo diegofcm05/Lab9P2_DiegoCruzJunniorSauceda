@@ -24,6 +24,7 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+        
         JPB_progreso.setVisible(false);
     }
 
@@ -92,6 +93,7 @@ public class Main extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jt_eliminar = new javax.swing.JTable();
         jb_eliminar = new javax.swing.JButton();
+        jb_update = new javax.swing.JButton();
         JPB_progreso = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -420,7 +422,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jb_listproducts.setBackground(new java.awt.Color(153, 153, 255));
+        jb_listproducts.setBackground(new java.awt.Color(51, 51, 255));
         jb_listproducts.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
         jb_listproducts.setForeground(new java.awt.Color(255, 255, 255));
         jb_listproducts.setText("Products");
@@ -431,7 +433,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jb_clearArea.setBackground(java.awt.Color.cyan);
+        jb_clearArea.setBackground(new java.awt.Color(0, 204, 204));
         jb_clearArea.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
         jb_clearArea.setForeground(new java.awt.Color(255, 255, 255));
         jb_clearArea.setText("Clear");
@@ -519,18 +521,32 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jb_update.setBackground(new java.awt.Color(102, 102, 102));
+        jb_update.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
+        jb_update.setForeground(new java.awt.Color(255, 255, 255));
+        jb_update.setText("Update Tabla");
+        jb_update.setFocusable(false);
+        jb_update.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_updateMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jb_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(41, 41, 41)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 836, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jb_update, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jb_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 836, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(45, Short.MAX_VALUE))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -538,7 +554,9 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(31, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
-                .addComponent(jb_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jb_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jb_update, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19))
         );
 
@@ -628,6 +646,29 @@ public class Main extends javax.swing.JFrame {
             JPB_progreso.setForeground(Color.yellow);
             JPB_progreso.setBackground(Color.GRAY);
             H.start();
+            
+            tf_orderid.setText("");
+            tf_orderdate.setText("");
+            tf_shipdate.setText("");
+            tf_shipmode.setText("");
+            tf_customerid.setText("");
+            tf_customername.setText("");
+            tf_segment.setText("");
+            tf_country.setText("");
+            tf_city.setText("");
+            tf_state.setText("");
+            tf_postalcode.setText("");
+            tf_region.setText("");
+            tf_productID.setText("");
+            tf_category.setText("");
+            tf_subcategory.setText("");
+            tf_productname.setText("");
+            tf_sales.setText("");
+            tf_quantity.setText("");
+            tf_discount.setText("");
+            tf_profit.setText("");
+            
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Ocurrio un error.");
             e.printStackTrace();
@@ -640,7 +681,7 @@ public class Main extends javax.swing.JFrame {
             db.conectar();
             try {
 
-                db.query.execute("delete from TenRecordReal where id = " + jt_eliminar.getSelectedRow());
+                db.query.execute("delete from TenRecordReal where id = " + jt_eliminar.getValueAt(jt_eliminar.getSelectedRow(), 0));
                 db.commit();
 
             } catch (SQLException ex) {
@@ -653,6 +694,7 @@ public class Main extends javax.swing.JFrame {
             JPB_progreso.setBackground(Color.GRAY);
             H.start();
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocurrio un error!");
             e.printStackTrace();
         }
 
@@ -660,35 +702,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_eliminarMouseClicked
 
     private void tp_crudStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tp_crudStateChanged
-        if (tp_crud.getSelectedIndex() == 2) {
-            try {
-
-                Dba db = new Dba("./BaseDatosLab.accdb");
-                db.conectar();
-                try {
-                    db.query.execute("select Id, [Order ID], [Order Date], [Customer ID], Country, City, [Product ID], Sales from TenRecordReal");
-                    ResultSet rs = db.query.getResultSet();
-                    while (rs.next()) {
-                        registros.add(new Registro(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8)));
-
-                    }
-
-                    for (Registro regs : registros) {
-                        Object[] row = {regs.getLinea(), regs.getOrderId(), regs.getOrderDate(), regs.getCustomerId(), regs.getCountry(), regs.getCity(), regs.getProductId(), regs.getSales()};
-                        DefaultTableModel modelo = (DefaultTableModel) jt_eliminar.getModel();
-                        modelo.addRow(row);
-                        jt_eliminar.setModel(modelo);
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                db.desconectar();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        
     }//GEN-LAST:event_tp_crudStateChanged
 
     private void jb_listordersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_listordersMouseClicked
@@ -717,7 +731,7 @@ public class Main extends javax.swing.JFrame {
 
             db.desconectar();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ocurrio un error");
+            JOptionPane.showMessageDialog(null, "Ocurrio un error.");
             e.printStackTrace();
         }
     }//GEN-LAST:event_jb_listordersMouseClicked
@@ -749,7 +763,7 @@ public class Main extends javax.swing.JFrame {
             H.start();
             db.desconectar();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ocurrio un error");
+            JOptionPane.showMessageDialog(null, "Ocurrio un error.");
             e.printStackTrace();
         }
     }//GEN-LAST:event_jb_listdetailsMouseClicked
@@ -784,7 +798,7 @@ public class Main extends javax.swing.JFrame {
             db.desconectar();
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ocurrio un error");
+            JOptionPane.showMessageDialog(null, "Ocurrio un error.");
             e.printStackTrace();
         }
     }//GEN-LAST:event_jb_listcustomersMouseClicked
@@ -814,7 +828,7 @@ public class Main extends javax.swing.JFrame {
             JPB_progreso.setVisible(true);
             H.start();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ocurrio un error");
+            JOptionPane.showMessageDialog(null, "Ocurrio un error.");
             e.printStackTrace();
         }
 
@@ -823,17 +837,53 @@ public class Main extends javax.swing.JFrame {
     private void jb_clearAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_clearAreaMouseClicked
         // TODO add your handling code here:
         try {
-            Thread H = new Hilo(Color.blue, JPB_progreso, ta_listas, "Text Area Limpiado", "", 34);
+            Thread H = new Hilo(Color.blue, JPB_progreso, ta_listas, "Text Area Limpiado", "", 50);
             JPB_progreso.setForeground(Color.CYAN);
             JPB_progreso.setBackground(Color.GRAY);
             JPB_progreso.setVisible(true);
             H.start();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ocurrio un error");
+            JOptionPane.showMessageDialog(null, "Ocurrio un error.");
             e.printStackTrace();
             
         }
     }//GEN-LAST:event_jb_clearAreaMouseClicked
+
+    private void jb_updateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_updateMouseClicked
+        try {
+            
+                DefaultTableModel modelo = (DefaultTableModel) jt_eliminar.getModel();
+                modelo.setRowCount(0);
+                registros.clear();
+                
+                Dba db = new Dba("./BaseDatosLab.accdb");
+                db.conectar();
+                try {
+                    db.query.execute("select Id, [Order ID], [Order Date], [Customer ID], Country, City, [Product ID], Sales from TenRecordReal");
+                    ResultSet rs = db.query.getResultSet();
+                    while (rs.next()) {
+                        registros.add(new Registro(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8)));
+
+                    }
+
+                    for (Registro regs : registros) {
+                        Object[] row = {regs.getLinea(), regs.getOrderId(), regs.getOrderDate(), regs.getCustomerId(), regs.getCountry(), regs.getCity(), regs.getProductId(), regs.getSales()};
+                        
+                        modelo.addRow(row);
+                        
+                    }
+                    jt_eliminar.setModel(modelo);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                db.desconectar();
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Ocurrio un error!");
+                e.printStackTrace();
+            }
+    }//GEN-LAST:event_jb_updateMouseClicked
 
     /**
      * @param args the command line arguments
@@ -905,6 +955,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jb_listdetails;
     private javax.swing.JButton jb_listorders;
     private javax.swing.JButton jb_listproducts;
+    private javax.swing.JButton jb_update;
     private javax.swing.JTable jt_eliminar;
     private javax.swing.JTextArea ta_listas;
     private javax.swing.JTextField tf_category;
