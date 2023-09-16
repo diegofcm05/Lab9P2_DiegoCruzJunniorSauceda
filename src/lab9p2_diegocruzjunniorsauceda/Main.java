@@ -87,6 +87,7 @@ public class Main extends javax.swing.JFrame {
         jb_listdetails = new javax.swing.JButton();
         jb_listcustomers = new javax.swing.JButton();
         jb_listproducts = new javax.swing.JButton();
+        jb_clearArea = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jt_eliminar = new javax.swing.JTable();
@@ -430,22 +431,35 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jb_clearArea.setBackground(java.awt.Color.cyan);
+        jb_clearArea.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
+        jb_clearArea.setForeground(new java.awt.Color(255, 255, 255));
+        jb_clearArea.setText("Clear");
+        jb_clearArea.setFocusable(false);
+        jb_clearArea.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_clearAreaMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 851, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jb_listorders, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
+                        .addGap(31, 31, 31)
                         .addComponent(jb_listdetails, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
                         .addComponent(jb_listcustomers, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(46, 46, 46)
-                        .addComponent(jb_listproducts, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(40, 40, 40)
+                        .addComponent(jb_listproducts, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jb_clearArea, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -453,10 +467,13 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jb_listorders, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jb_listdetails, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jb_listorders, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jb_listdetails, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jb_listcustomers, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jb_listproducts, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jb_listproducts, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jb_clearArea, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(27, Short.MAX_VALUE))
@@ -675,96 +692,98 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_tp_crudStateChanged
 
     private void jb_listordersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_listordersMouseClicked
-        try{
+        try {
             Dba db = new Dba("./BaseDatosLab.accdb");
             db.conectar();
             db.query.execute("select [Order ID], [Order Date], [Ship Date], [Ship Mode], [Customer ID] from TenRecordReal");
             ResultSet rs = db.query.getResultSet();
             String shower = "";
             int cont = 1;
-            while (rs.next()){
-                    shower+="Order " + cont + "\n";
-                    shower+="Order ID: " + rs.getString(1) + "\n";
-                    shower+="Order Date: " + rs.getString(2) + "\n";
-                    shower+="Ship Date: " + rs.getString(3) + "\n";
-                    shower+="Ship Mode: " + rs.getString(4) + "\n";
-                    shower+="Customer ID: " + rs.getString(5) + "\n";
-                    shower+="\n";
-                    cont++;
+            while (rs.next()) {
+                shower += "Order " + cont + "\n";
+                shower += "Order ID: " + rs.getString(1) + "\n";
+                shower += "Order Date: " + rs.getString(2) + "\n";
+                shower += "Ship Date: " + rs.getString(3) + "\n";
+                shower += "Ship Mode: " + rs.getString(4) + "\n";
+                shower += "Customer ID: " + rs.getString(5) + "\n";
+                shower += "\n";
+                cont++;
             }
             Thread H = new Hilo(Color.green, JPB_progreso, ta_listas, "Orders Listados", shower, 25);
             JPB_progreso.setVisible(true);
             JPB_progreso.setForeground(Color.green);
             JPB_progreso.setBackground(Color.GRAY);
             H.start();
-            
+
             db.desconectar();
-        } catch (Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ocurrio un error");
             e.printStackTrace();
         }
     }//GEN-LAST:event_jb_listordersMouseClicked
 
     private void jb_listdetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_listdetailsMouseClicked
-        try{
+        try {
             Dba db = new Dba("./BaseDatosLab.accdb");
             db.conectar();
             db.query.execute("select [Order ID], [Product ID], [Sales], [Quantity], [Discount], [Profit] from TenRecordReal");
             ResultSet rs = db.query.getResultSet();
             String shower = "";
             int cont = 1;
-            while (rs.next()){
-                    shower+="Details from Order " + cont + "\n";
-                    shower+="Order ID: " + rs.getString(1) + "\n";
-                    shower+="Product ID: " + rs.getString(2) + "\n";
-                    shower+="Sales: " + rs.getString(3) + "\n";
-                    shower+="Quantity: " + rs.getString(4) + "\n";
-                    shower+="Discount: " + rs.getString(5) + "\n";
-                    shower+="Profit: " + rs.getString(6) + "\n";
-                    shower+="\n";
-                    cont++;
+            while (rs.next()) {
+                shower += "Details from Order " + cont + "\n";
+                shower += "Order ID: " + rs.getString(1) + "\n";
+                shower += "Product ID: " + rs.getString(2) + "\n";
+                shower += "Sales: " + rs.getString(3) + "\n";
+                shower += "Quantity: " + rs.getString(4) + "\n";
+                shower += "Discount: " + rs.getString(5) + "\n";
+                shower += "Profit: " + rs.getString(6) + "\n";
+                shower += "\n";
+                cont++;
             }
-        
+
             Thread H = new Hilo(Color.orange, JPB_progreso, ta_listas, "Details Listados", shower, 20);
             JPB_progreso.setVisible(true);
             JPB_progreso.setForeground(Color.orange);
             JPB_progreso.setBackground(Color.GRAY);
             H.start();
             db.desconectar();
-        } catch (Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ocurrio un error");
             e.printStackTrace();
         }
     }//GEN-LAST:event_jb_listdetailsMouseClicked
 
     private void jb_listcustomersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_listcustomersMouseClicked
-        try{
+        try {
             Dba db = new Dba("./BaseDatosLab.accdb");
             db.conectar();
-            db.query.execute("select [Order ID], [Product ID], [Sales], [Quantity], [Discount], [Profit] from TenRecordReal");
+            db.query.execute("select [Customer ID], [Customer Name], [Segment], [Country], [City], [State], [Postal Code], [Region] from TenRecordReal");
             ResultSet rs = db.query.getResultSet();
             String shower = "";
             int cont = 1;
-            while (rs.next()){
-                    shower+="Details  " + cont + "\n";
-                    shower+="Order ID: " + rs.getString(1) + "\n";
-                    shower+="Product ID: " + rs.getString(2) + "\n";
-                    shower+="Sales: " + rs.getString(3) + "\n";
-                    shower+="Quantity: " + rs.getString(4) + "\n";
-                    shower+="Discount: " + rs.getString(5) + "\n";
-                    shower+="Profit: " + rs.getString(6) + "\n";
-                    shower+="\n";
-                    cont++;
+            while (rs.next()) {
+                shower += "Customer  " + cont + "\n";
+                shower += "Customer ID: " + rs.getString(1) + "\n";
+                shower += "Customer Name: " + rs.getString(2) + "\n";
+                shower += "Segment: " + rs.getString(3) + "\n";
+                shower += "Country: " + rs.getString(4) + "\n";
+                shower += "City: " + rs.getString(5) + "\n";
+                shower += "State: " + rs.getString(6) + "\n";
+                shower += "Postal Code: " + rs.getString(7) + "\n";
+                shower += "Region: " + rs.getString(8) + "\n";
+                shower += "\n";
+                cont++;
             }
-            
-            Thread H = new Hilo(Color.red, JPB_progreso, "Customers Listados", 17);
+
+            Thread H = new Hilo(Color.red, JPB_progreso, ta_listas, "Customers Listados", shower, 17);
             JPB_progreso.setVisible(true);
             JPB_progreso.setForeground(Color.red);
             JPB_progreso.setBackground(Color.GRAY);
             H.start();
             db.desconectar();
-            
-        } catch (Exception e){
+
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ocurrio un error");
             e.printStackTrace();
         }
@@ -772,12 +791,49 @@ public class Main extends javax.swing.JFrame {
 
     private void jb_listproductsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_listproductsMouseClicked
         // TODO add your handling code here:
-        Thread H = new Hilo(Color.blue, JPB_progreso, "Products Listados", 34);
-        JPB_progreso.setForeground(Color.BLUE);
-        JPB_progreso.setBackground(Color.GRAY);
-        JPB_progreso.setVisible(true);
-        H.start();
+        try {
+            Dba db = new Dba("./BaseDatosLab.accdb");
+            db.conectar();
+            db.query.execute("select [Product ID], [Category], [Sub-Category], [Product Name] from TenRecordReal");
+            ResultSet rs = db.query.getResultSet();
+            String shower = "";
+            int cont = 1;
+            while (rs.next()) {
+                shower += "Product  " + cont + "\n";
+                shower += "Product ID: " + rs.getString(1) + "\n";
+                shower += "Category: " + rs.getString(2) + "\n";
+                shower += "Sub-Category: " + rs.getString(3) + "\n";
+                shower += "Product Name: " + rs.getString(4) + "\n";
+                shower += "\n";
+                cont++;
+            }
+            
+            Thread H = new Hilo(Color.blue, JPB_progreso, ta_listas, "Products Listados", shower, 34);
+            JPB_progreso.setForeground(Color.BLUE);
+            JPB_progreso.setBackground(Color.GRAY);
+            JPB_progreso.setVisible(true);
+            H.start();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocurrio un error");
+            e.printStackTrace();
+        }
+
     }//GEN-LAST:event_jb_listproductsMouseClicked
+
+    private void jb_clearAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_clearAreaMouseClicked
+        // TODO add your handling code here:
+        try {
+            Thread H = new Hilo(Color.blue, JPB_progreso, ta_listas, "Text Area Limpiado", "", 34);
+            JPB_progreso.setForeground(Color.CYAN);
+            JPB_progreso.setBackground(Color.GRAY);
+            JPB_progreso.setVisible(true);
+            H.start();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocurrio un error");
+            e.printStackTrace();
+            
+        }
+    }//GEN-LAST:event_jb_clearAreaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -843,6 +899,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jb_agregar;
+    private javax.swing.JButton jb_clearArea;
     private javax.swing.JButton jb_eliminar;
     private javax.swing.JButton jb_listcustomers;
     private javax.swing.JButton jb_listdetails;
