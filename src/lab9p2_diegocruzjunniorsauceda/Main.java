@@ -82,7 +82,7 @@ public class Main extends javax.swing.JFrame {
         jb_agregar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        ta_listas = new javax.swing.JTextArea();
         jb_listorders = new javax.swing.JButton();
         jb_listdetails = new javax.swing.JButton();
         jb_listcustomers = new javax.swing.JButton();
@@ -382,9 +382,9 @@ public class Main extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 204));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        ta_listas.setColumns(20);
+        ta_listas.setRows(5);
+        jScrollPane1.setViewportView(ta_listas);
 
         jb_listorders.setBackground(new java.awt.Color(0, 102, 0));
         jb_listorders.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
@@ -675,31 +675,99 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_tp_crudStateChanged
 
     private void jb_listordersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_listordersMouseClicked
-        // TODO add your handling code here:
-        Thread H = new Hilo(Color.green, JPB_progreso, "Orders Listados", 25);
-
-        JPB_progreso.setVisible(true);
-        JPB_progreso.setForeground(Color.green);
-        JPB_progreso.setBackground(Color.GRAY);
-        H.start();
+        try{
+            Dba db = new Dba("./BaseDatosLab.accdb");
+            db.conectar();
+            db.query.execute("select [Order ID], [Order Date], [Ship Date], [Ship Mode], [Customer ID] from TenRecordReal");
+            ResultSet rs = db.query.getResultSet();
+            String shower = "";
+            int cont = 1;
+            while (rs.next()){
+                    shower+="Order " + cont + "\n";
+                    shower+="Order ID: " + rs.getString(1) + "\n";
+                    shower+="Order Date: " + rs.getString(2) + "\n";
+                    shower+="Ship Date: " + rs.getString(3) + "\n";
+                    shower+="Ship Mode: " + rs.getString(4) + "\n";
+                    shower+="Customer ID: " + rs.getString(5) + "\n";
+                    shower+="\n";
+                    cont++;
+            }
+            Thread H = new Hilo(Color.green, JPB_progreso, ta_listas, "Orders Listados", shower, 25);
+            JPB_progreso.setVisible(true);
+            JPB_progreso.setForeground(Color.green);
+            JPB_progreso.setBackground(Color.GRAY);
+            H.start();
+            
+            db.desconectar();
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Ocurrio un error");
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jb_listordersMouseClicked
 
     private void jb_listdetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_listdetailsMouseClicked
-        // TODO add your handling code here:
-        Thread H = new Hilo(Color.orange, JPB_progreso, "Details Listados", 20);
-        JPB_progreso.setVisible(true);
-        JPB_progreso.setForeground(Color.orange);
-        JPB_progreso.setBackground(Color.GRAY);
-        H.start();
+        try{
+            Dba db = new Dba("./BaseDatosLab.accdb");
+            db.conectar();
+            db.query.execute("select [Order ID], [Product ID], [Sales], [Quantity], [Discount], [Profit] from TenRecordReal");
+            ResultSet rs = db.query.getResultSet();
+            String shower = "";
+            int cont = 1;
+            while (rs.next()){
+                    shower+="Details from Order " + cont + "\n";
+                    shower+="Order ID: " + rs.getString(1) + "\n";
+                    shower+="Product ID: " + rs.getString(2) + "\n";
+                    shower+="Sales: " + rs.getString(3) + "\n";
+                    shower+="Quantity: " + rs.getString(4) + "\n";
+                    shower+="Discount: " + rs.getString(5) + "\n";
+                    shower+="Profit: " + rs.getString(6) + "\n";
+                    shower+="\n";
+                    cont++;
+            }
+        
+            Thread H = new Hilo(Color.orange, JPB_progreso, ta_listas, "Details Listados", shower, 20);
+            JPB_progreso.setVisible(true);
+            JPB_progreso.setForeground(Color.orange);
+            JPB_progreso.setBackground(Color.GRAY);
+            H.start();
+            db.desconectar();
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Ocurrio un error");
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jb_listdetailsMouseClicked
 
     private void jb_listcustomersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_listcustomersMouseClicked
-        // TODO add your handling code here:
-        Thread H = new Hilo(Color.red, JPB_progreso, "Customers Listados", 17);
-        JPB_progreso.setVisible(true);
-        JPB_progreso.setForeground(Color.red);
-        JPB_progreso.setBackground(Color.GRAY);
-        H.start();
+        try{
+            Dba db = new Dba("./BaseDatosLab.accdb");
+            db.conectar();
+            db.query.execute("select [Order ID], [Product ID], [Sales], [Quantity], [Discount], [Profit] from TenRecordReal");
+            ResultSet rs = db.query.getResultSet();
+            String shower = "";
+            int cont = 1;
+            while (rs.next()){
+                    shower+="Details  " + cont + "\n";
+                    shower+="Order ID: " + rs.getString(1) + "\n";
+                    shower+="Product ID: " + rs.getString(2) + "\n";
+                    shower+="Sales: " + rs.getString(3) + "\n";
+                    shower+="Quantity: " + rs.getString(4) + "\n";
+                    shower+="Discount: " + rs.getString(5) + "\n";
+                    shower+="Profit: " + rs.getString(6) + "\n";
+                    shower+="\n";
+                    cont++;
+            }
+            
+            Thread H = new Hilo(Color.red, JPB_progreso, "Customers Listados", 17);
+            JPB_progreso.setVisible(true);
+            JPB_progreso.setForeground(Color.red);
+            JPB_progreso.setBackground(Color.GRAY);
+            H.start();
+            db.desconectar();
+            
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Ocurrio un error");
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jb_listcustomersMouseClicked
 
     private void jb_listproductsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_listproductsMouseClicked
@@ -774,7 +842,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton jb_agregar;
     private javax.swing.JButton jb_eliminar;
     private javax.swing.JButton jb_listcustomers;
@@ -782,6 +849,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jb_listorders;
     private javax.swing.JButton jb_listproducts;
     private javax.swing.JTable jt_eliminar;
+    private javax.swing.JTextArea ta_listas;
     private javax.swing.JTextField tf_category;
     private javax.swing.JTextField tf_city;
     private javax.swing.JTextField tf_country;
