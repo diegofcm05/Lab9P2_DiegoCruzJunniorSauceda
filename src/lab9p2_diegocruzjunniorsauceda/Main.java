@@ -577,7 +577,22 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_agregarMouseClicked
 
     private void jb_eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_eliminarMouseClicked
-
+        try {
+            Dba db  = new Dba("./BaseDatosLab.accdb");
+            db.conectar();
+            try {
+                
+                db.query.execute("delete from TenRecordReal where id = "+jt_eliminar.getSelectedRow());
+                db.commit();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            db.desconectar();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
         
     }//GEN-LAST:event_jb_eliminarMouseClicked
 
