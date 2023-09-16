@@ -12,6 +12,8 @@ public class Registro {
     private String orderId,OrderDate,shipDate,shipMode,customerId,
             customerName,Segment,Country,City,State,PostalCode,Region,ProductId,Category,SubCateg,ProductName,Sales,Quantity,Discount,Profit;
 
+    private String linea;
+    
     public Registro(String orderId, String OrderDate, String shipDate, String shipMode, String customerId, String customerName, String Segment, String Country, String City, String State, String PostalCode, String Region, String ProductId, String Category, String SubCateg, String ProductName, String Sales, String Quantity, String Discount, String Profit) {
         this.orderId = orderId;
         this.OrderDate = OrderDate;
@@ -34,6 +36,29 @@ public class Registro {
         this.Discount = Discount;
         this.Profit = Profit;
     }
+
+    public Registro(String linea, String orderId, String OrderDate, String customerId, String Country, String City, String ProductId, String Sales) {
+        this.linea = linea;
+        this.orderId = orderId;
+        this.OrderDate = OrderDate;
+        this.customerId = customerId;
+        this.Country = Country;
+        this.City = City;
+        this.ProductId = ProductId;
+        this.Sales = Sales;
+    }
+
+    public String getLinea() {
+        return linea;
+    }
+
+    public void setLinea(String linea) {
+        this.linea = linea;
+    }
+    
+    
+    
+    
 
     public String getOrderId() {
         return orderId;

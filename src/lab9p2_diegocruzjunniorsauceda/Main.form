@@ -48,7 +48,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                  <Component id="jTabbedPane1" min="-2" pref="922" max="-2" attributes="0"/>
+                  <Component id="tp_crud" min="-2" pref="922" max="-2" attributes="0"/>
                   <EmptySpace pref="41" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -57,14 +57,17 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace pref="49" max="32767" attributes="0"/>
-                  <Component id="jTabbedPane1" min="-2" pref="532" max="-2" attributes="0"/>
+                  <Component id="tp_crud" min="-2" pref="532" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
+        <Container class="javax.swing.JTabbedPane" name="tp_crud">
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="tp_crudStateChanged"/>
+          </Events>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
           <SubComponents>
@@ -804,7 +807,7 @@
                     <Component class="javax.swing.JTable" name="jt_eliminar">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="8" rowCount="4">
+                          <Table columnCount="8" rowCount="0">
                             <Column editable="true" title="Row ID" type="java.lang.String"/>
                             <Column editable="true" title="Order ID" type="java.lang.String"/>
                             <Column editable="true" title="Order Date" type="java.lang.String"/>
@@ -833,6 +836,9 @@
                     <Property name="text" type="java.lang.String" value="Eliminar Registro"/>
                     <Property name="focusable" type="boolean" value="false"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jb_eliminarMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
